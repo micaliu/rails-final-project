@@ -27,7 +27,8 @@ gem 'devise'
 
 gem "letter_opener", :group => :development
 
-gem "cancan", :git => "git://github.com/ryanb/cancan.git", :branch => "2.0"
+# gem "cancan", :git => "git://github.com/ryanb/cancan.git", :branch => "2.0"
+gem 'cancancan', '~> 1.9'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

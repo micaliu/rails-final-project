@@ -1,0 +1,2 @@
+module ThreadContentsHelper
+end

@@ -2,6 +2,10 @@
 
 one:
   content: MyText
+  thread_content_id: 1
+  count_of_posts: 1
 
 two:
   content: MyText
+  thread_content_id: 1
+  count_of_posts: 1

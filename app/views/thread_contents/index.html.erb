@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Thread Contents</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Content</th>
+      <th>Topic</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @thread_contents.each do |thread_content| %>
+      <tr>
+        <td><%= thread_content.content %></td>
+        <td><%= thread_content.topic_id %></td>
+        <td><%= link_to 'Show', thread_content %></td>
+        <td><%= link_to 'Edit', edit_thread_content_path(thread_content) %></td>
+        <td><%= link_to 'Destroy', thread_content, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Thread content', new_thread_content_path %>

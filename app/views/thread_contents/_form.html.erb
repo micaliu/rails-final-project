@@ -1,0 +1,25 @@
+<%= form_for(@thread_content) do |f| %>
+  <% if @thread_content.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@thread_content.errors.count, "error") %> prohibited this thread_content from being saved:</h2>
+
+      <ul>
+      <% @thread_content.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :content %><br>
+    <%= f.text_area :content %>
+  </div>
+  <div class="field">
+    <%= f.label :topic_id %><br>
+    <%= f.collection_select(:topic_id,Topic.all,:id,:name) %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

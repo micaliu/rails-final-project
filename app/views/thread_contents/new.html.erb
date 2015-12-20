@@ -1,0 +1,9 @@
+<% if cannot? :create , ThreadContent %>
+	<span class="permission-message">You aren't allowed to create new thread.</span>
+<% else %>
+	<h1>New Thread Content</h1>
+
+	<%= render 'form' %>
+
+	<%= link_to 'Back', thread_contents_path %>
+<% end %>

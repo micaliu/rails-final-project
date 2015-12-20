@@ -1,29 +1,24 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Listing Topics</h1>
+<h1>Welcome to programmer's forum</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Description</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
+<div>
     <% @topics.each do |topic| %>
-      <tr>
-        <td><%= topic.name %></td>
-        <td><%= topic.description %></td>
-        <td><%= link_to 'Show', topic %></td>
-        <td><%= link_to 'Edit', edit_topic_path(topic) %></td>
-        <td><%= link_to 'Destroy', topic, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+        <h2>
+        	<%= topic.name %>:<%= topic.description %>   
+        </h2> 
+        <p>
+        	<%= link_to 'Show', topic %>    
+         	<%= link_to 'Edit', edit_topic_path(topic) if can? :edit, User %>
+        	<%= link_to 'Destroy', topic, method: :delete, data: { confirm: 'Are you sure?' } if can? :destroy, User %>
+   		</p>
 
+        <% topic.thread_contents.each do |tc|%>
+          <p style="font-size:14px"> <%= link_to tc.content, tc %>  <b><%= tc.count_of_posts %> posts</b></p>
+        <% end %>
+
+    <% end %>
+</div>
 <br>
 
-<%= link_to 'New Topic', new_topic_path %>
+<%= link_to 'New Topic', new_topic_path if can? :create, User %>

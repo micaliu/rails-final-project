@@ -2,43 +2,40 @@ class Ability
   include CanCan::Ability
 
   def initialize(user)
-    # Define abilities for the passed in (current) user. For example:
-    #
-      # if user.is? :admin
-      #   can :access, :all
-      # elsif user.is? :manager
-      #   can :access, :home
-      #   can :create, [:topics, :posts]
-      # elsif user.is? :user
-      #   can :access, :home
-      #   can :create, [:posts, :replies]
-      # else
-      #   can :read, :all
-      # end
-    if !user
+    if user.is? :admin
+      can :manage, :all
+    elsif user.is? :manager
+      can :manage, [:topics, :thread_contents, :posts]
+    elsif user.is? :user
+      can :manage, [:thread_contents, :posts]
+    else
       can :read, :all
     end
-    # if user
-    #   admin_rules if user.roles.include? :admin
-    #   editor_rules if user.roles.include? :manager
-    #   default_rules
-    # end
+    # Define abilities for the passed in user here. For example:
     #
-    # Here if there is a user he will be able to perform any action on any controller.
-    # If someone is not logged in he can only access the home, users, and sessions controllers.
+    #   user ||= User.new # guest user (not logged in)
+    #   if user.admin?
+    #     can :manage, :all
+    #   else
+    #     can :read, :all
+    #   end
     #
-    # The first argument to `can` is the action the user can perform. The second argument
-    # is the controller name they can perform that action on. You can pass :access and :all
-    # to represent any action and controller respectively. Passing an array to either of
-    # these will grant permission on each item in the array.
+    # The first argument to `can` is the action you are giving the user
+    # permission to do.
+    # If you pass :manage it will apply to every action. Other common actions
+    # here are :read, :create, :update and :destroy.
     #
-    # See the wiki for details: https://github.com/ryanb/cancan/wiki/Defining-Abilities
-  end
-  def admin_rules
-    can :manage, :all
-  end
-
-  def manager_rules
-    can :manage, [Topic, Post]
+    # The second argument is the resource the user can perform the action on.
+    # If you pass :all it will apply to every resource. Otherwise pass a Ruby
+    # class of the resource.
+    #
+    # The third argument is an optional hash of conditions to further filter the
+    # objects.
+    # For example, here the user can only update published articles.
+    #
+    #   can :update, Article, :published => true
+    #
+    # See the wiki for details:
+    # https://github.com/CanCanCommunity/cancancan/wiki/Defining-Abilities
   end
 end
